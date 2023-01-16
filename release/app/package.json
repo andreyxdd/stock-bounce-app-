@@ -1,0 +1,18 @@
+{
+  "name": "marketeye-desktop-app",
+  "version": "1.0.0",
+  "description": "A private desktop app to analyze the stock market based on MarketEye API and electron-react-boilerplate",
+  "main": "./dist/main/main.js",
+  "author": {
+    "name": "Andrey Volkov",
+    "email": "volkov@ualberta.ca",
+    "url": "https://linktr.ee/andreyxdd"
+  },
+  "scripts": {
+    "electron-rebuild": "node -r ts-node/register ../../.erb/scripts/electron-rebuild.js",
+    "link-modules": "node -r ts-node/register ../../.erb/scripts/link-modules.ts",
+    "postinstall": "npm run electron-rebuild && npm run link-modules"
+  },
+  "dependencies": {},
+  "license": "UNLICENSED"
+}
