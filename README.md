@@ -1,17 +1,10 @@
-# Market-Eye Desktop Suite
+# Stock-bounce: Electron App
 
 <p>
-The Market-Eye desktop app tabulates technical indicators for the stocks from NYSE/NASDAQ markets through a light interface.
+Desktop client to showcase results of the stock markets analysis with bounce algorithm
 </p>
 <p>The project is built with <a href="https://github.com/andreyxdd/marketeye-api">Market-Eye API</a>, <a href="https://github.com/electron-react-boilerplate/electron-react-boilerplate">Electron React Boilerplate</a>, and <a href="https://mui.com/">MUI</a>.
 </p>
-
-<div align="center">
-
-[![Build Status][github-actions-status]][github-actions-url]
-[![Github Tag][github-tag-image]][github-tag-url]
-
-</div>
 
 ## Market-Eye API
 
@@ -26,8 +19,8 @@ MarketEye API provides the most recent stock market analytics by calculating ind
 Clone the repo and install dependencies:
 
 ```bash
-git clone https://github.com/andreyxdd/marketeye-desktop-app.git
-cd marketeye-desktop-app
+git clone https://github.com/andreyxdd/stock-bounce-app.git
+cd stock-bounce-app
 npm install
 ```
 
