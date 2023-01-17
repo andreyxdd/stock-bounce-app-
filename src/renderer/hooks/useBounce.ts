@@ -1,24 +1,21 @@
 import { useQuery } from 'react-query';
 import { IDataProps } from 'types';
 import useDates from './useDates';
-
-type DatesType = {
-  availableDates: Array<string>;
-  selectedDate: string;
-};
+import useStore from './useStore';
 
 const useBounce = () => {
+  const period = useStore((state) => state.period);
   const { data: dates } = useDates();
   const selectedDate = dates?.selectedDate;
 
   const query = useQuery<Array<IDataProps>>(
-    ['bounce', selectedDate],
+    ['bounce', selectedDate, period],
     async () => {
       try {
         if (!selectedDate) throw new Error('No selected date');
         const responseBounceData = await window.electronAPI.getBounceStocks({
           date: selectedDate,
-          period: 1,
+          period,
         });
 
         return responseBounceData;

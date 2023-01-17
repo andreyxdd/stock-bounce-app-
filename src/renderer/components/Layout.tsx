@@ -30,7 +30,7 @@ const longTermPeriods = [
 
 const Layout = ({ children }: ILayoutProps) => {
   const [period, term] = useStore(
-    (state: IStore) => [state.period, state.term, state.setPeriod],
+    (state: IStore) => [state.period, state.term],
     shallow
   );
 

@@ -73,17 +73,6 @@ const DataTable = () => {
         <SkeletonLoader
           style={{ width: '100%', minHeight: 630, position: 'absolute' }}
         />
-        <Typography
-          variant="h4"
-          style={{
-            position: 'absolute',
-            top: '40%',
-            left: '48%',
-            color: '#696969',
-          }}
-        >
-          {`${100}%`}
-        </Typography>
       </div>
     </div>
   );

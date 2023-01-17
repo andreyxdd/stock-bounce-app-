@@ -45,7 +45,7 @@ ipcMain.handle('get-bounce-stocks', async (_event, arg) => {
       {
         params: {
           date: arg.date,
-          period: arg.period,
+          period: arg.period + 1,
           api_key: process.env.MARKETEYE_API_KEY,
         },
       }

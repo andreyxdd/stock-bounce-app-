@@ -2,7 +2,7 @@ import { MemoryRouter as Router, Routes, Route } from 'react-router-dom';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import Layout from './components/Layout';
-import DataTable from './components/DataTable/DataTable';
+import DataTable from './components/DataTable';
 import './App.css';
 
 const theme = createTheme({

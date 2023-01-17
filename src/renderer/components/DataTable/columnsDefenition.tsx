@@ -3,13 +3,13 @@ import { GridColDef, GridValueFormatterParams } from '@mui/x-data-grid';
 const columnsDefinition: GridColDef[] = [
   {
     field: 'id',
-    headerName: '#',
+    headerName: 'Rank',
     align: 'center',
     headerAlign: 'center',
     description:
       'Ranking by the accumulative differences between close-open prices',
     hideable: false,
-    flex: 0.2,
+    flex: 0.05,
   },
   {
     field: 'ticker',
@@ -29,17 +29,17 @@ const columnsDefinition: GridColDef[] = [
     disableColumnMenu: true,
     sortable: false,
     hideable: false,
-    flex: 1,
+    flex: 0.4,
   },
   {
     field: 'open',
-    headerName: 'Opening price',
+    headerName: 'Selected date opening price',
     type: 'number',
     align: 'center',
     headerAlign: 'center',
     valueFormatter: (params: GridValueFormatterParams) => {
       const valueFormatted = Number(
-        (params.value as number).toFixed(2)
+        (params.value as number).toPrecision(5)
       ).toLocaleString();
       return valueFormatted;
     },
@@ -50,13 +50,13 @@ const columnsDefinition: GridColDef[] = [
   },
   {
     field: 'close',
-    headerName: 'Closing price',
+    headerName: 'Selected date closing price',
     type: 'number',
     align: 'center',
     headerAlign: 'center',
     valueFormatter: (params: GridValueFormatterParams) => {
       const valueFormatted = Number(
-        (params.value as number).toFixed(2)
+        (params.value as number).toPrecision(4)
       ).toLocaleString();
       return valueFormatted;
     },
@@ -67,7 +67,7 @@ const columnsDefinition: GridColDef[] = [
   },
   {
     field: 'cp_op_precentage_diff',
-    headerName: '1-day Open-Close Change, %',
+    headerName: 'Open-Close Change, %',
     type: 'number',
     align: 'center',
     headerAlign: 'center',

@@ -8,21 +8,15 @@ import {
   IconButton,
 } from '@mui/material';
 import SportsBasketballIcon from '@mui/icons-material/SportsBasketball';
-import shallow from 'zustand/shallow';
-import useStore, { IStore } from '../hooks/useStore';
+import useStore from '../hooks/useStore';
 
 const Navbar = () => {
-  const [term, setTerm] = useStore(
-    (state: IStore) => [state.term, state.setTerm],
-    shallow
-  );
-
   const handleClick = (
     e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>,
-    newTerm: 'short' | 'long'
+    term: 'short' | 'long'
   ) => {
     e.preventDefault();
-    setTerm(newTerm);
+    useStore.setState({ term, period: term === 'short' ? 0 : 6 });
   };
 
   return (
@@ -44,7 +38,9 @@ const Navbar = () => {
           <Button
             // eslint-disable-next-line @typescript-eslint/ban-ts-comment
             // @ts-ignore
-            variant={term === 'short' ? 'contained' : 'outlined'}
+            variant={
+              useStore.getState().term === 'short' ? 'contained' : 'outlined'
+            }
             color="secondary"
             sx={{ mr: 2 }}
             onClick={(e) => handleClick(e, 'short')}
@@ -54,7 +50,9 @@ const Navbar = () => {
           <Button
             // eslint-disable-next-line @typescript-eslint/ban-ts-comment
             // @ts-ignore
-            variant={term === 'long' ? 'contained' : 'outlined'}
+            variant={
+              useStore.getState().term === 'long' ? 'contained' : 'outlined'
+            }
             color="secondary"
             sx={{ mr: 2 }}
             onClick={(e) => handleClick(e, 'long')}
