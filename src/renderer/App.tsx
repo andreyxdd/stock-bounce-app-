@@ -1,30 +1,35 @@
-import React from 'react';
 import { MemoryRouter as Router, Routes, Route } from 'react-router-dom';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { QueryClient, QueryClientProvider } from 'react-query';
 import Layout from './components/Layout';
 import DataTable from './components/DataTable/DataTable';
 import './App.css';
-import useStore, { IStore } from './hooks/useStore';
+
+const theme = createTheme({
+  palette: {
+    primary: { main: '#2C5F2D' },
+    secondary: { main: '#97BC62FF' },
+  },
+});
 
 const MainComponent = () => {
-  const onMountFetch = useStore((state: IStore) => state.onMountFetch);
-
-  React.useEffect(() => {
-    onMountFetch();
-  }, [onMountFetch]);
-
   return (
-    <Layout>
-      <DataTable />
-    </Layout>
+    <ThemeProvider theme={theme}>
+      <Layout>{/* <DataTable /> */}</Layout>
+    </ThemeProvider>
   );
 };
 
+const queryClient = new QueryClient();
+
 export default function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<MainComponent />} />
-      </Routes>
-    </Router>
+    <QueryClientProvider client={queryClient}>
+      <Router>
+        <Routes>
+          <Route path="/" element={<MainComponent />} />
+        </Routes>
+      </Router>
+    </QueryClientProvider>
   );
 }

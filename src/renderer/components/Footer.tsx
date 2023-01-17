@@ -15,7 +15,7 @@ const Footer = () => {
       <Typography variant="caption" component="p">
         Proudly created by{' '}
         <a
-          href="https://linktr.ee/andreyxdd"
+          href="https://github.com/andreyxdd"
           style={{ textDecoration: 'none', color: 'grey' }}
         >
           Andrey Volkov

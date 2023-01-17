@@ -38,60 +38,23 @@ ipcMain.on('ipc-example', async (event, arg) => {
 // ---
 // Communication routes
 
-ipcMain.handle('get-ticker-analytics', async (_event, arg) => {
+ipcMain.handle('get-bounce-stocks', async (_event, arg) => {
   try {
     const response = await axios.get(
-      `${process.env.MARKETEYE_API_URL_ANALYTICS}/get_ticker_analytics`,
+      `${process.env.MARKETEYE_API_URL_BOUNCE}/get_bounce_stocks`,
       {
         params: {
           date: arg.date,
-          ticker: arg.ticker,
+          period: arg.period,
           api_key: process.env.MARKETEYE_API_KEY,
         },
       }
     );
 
-    const tickerData: IDataProps = response.data;
-    return tickerData;
-  } catch (e) {
-    console.log(e);
-    return null;
-  }
-});
-
-ipcMain.handle('get-analytics-lists-by-criteria', async (_event, arg) => {
-  try {
-    const response = await axios.get(
-      `${process.env.MARKETEYE_API_URL_ANALYTICS}/get_analytics_lists_by_criteria`,
-      {
-        params: {
-          date: arg.date,
-          api_key: process.env.MARKETEYE_API_KEY,
-        },
-      }
-    );
-    const { data } = response;
-    return data;
-  } catch (e) {
-    console.log(e);
-    return null;
-  }
-});
-
-ipcMain.handle('get-analytics-lists-by-criterion', async (_event, arg) => {
-  try {
-    const response = await axios.get(
-      `${process.env.MARKETEYE_API_URL_ANALYTICS}/get_analytics_lists_by_criterion`,
-      {
-        params: {
-          date: arg.date,
-          criterion: arg.criterion,
-          api_key: process.env.MARKETEYE_API_KEY,
-        },
-      }
-    );
-    const { data } = response;
-    return data;
+    console.log(response.data);
+    // const tickerData: IDataProps = response.data;
+    // return tickerData;
+    return [];
   } catch (e) {
     console.log(e);
     return null;
@@ -101,7 +64,7 @@ ipcMain.handle('get-analytics-lists-by-criterion', async (_event, arg) => {
 ipcMain.handle('get-dates', async () => {
   try {
     const response = await axios.get(
-      `${process.env.MARKETEYE_API_URL_ANALYTICS}/get_dates`,
+      `${process.env.MARKETEYE_API_URL_BOUNCE}/get_dates`,
       {
         params: {
           api_key: process.env.MARKETEYE_API_KEY,
@@ -114,44 +77,6 @@ ipcMain.handle('get-dates', async () => {
   } catch (e) {
     console.log(e);
     return [];
-  }
-});
-
-ipcMain.handle('get-market-analytics', async (_event, arg) => {
-  try {
-    const response = await axios.get(
-      `${process.env.MARKETEYE_API_URL_ANALYTICS}/get_market_analytics`,
-      {
-        params: {
-          date: arg.date,
-          api_key: process.env.MARKETEYE_API_KEY,
-        },
-      }
-    );
-    const { data } = response;
-    return data;
-  } catch (e) {
-    console.log(e);
-    return null;
-  }
-});
-
-ipcMain.handle('notify-developer', async (_event, arg) => {
-  try {
-    await axios.post(
-      `${process.env.MARKETEYE_API_URL_NOTIFICATIONS}/notify_developer`,
-      { email_body: arg.body, email_subject: arg.subject },
-      {
-        headers: { 'Content-Type': 'application/json; charset=UTF-8' },
-        params: {
-          api_key: process.env.MARKETEYE_API_KEY,
-        },
-      }
-    );
-    return { ok: true };
-  } catch (e) {
-    console.log(e);
-    return { ok: false, error: e };
   }
 });
 

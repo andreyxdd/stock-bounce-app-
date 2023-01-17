@@ -7,26 +7,22 @@ import {
   Button,
   IconButton,
 } from '@mui/material';
-import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
+import SportsBasketballIcon from '@mui/icons-material/SportsBasketball';
 import shallow from 'zustand/shallow';
-import ModalForm from './ModalForm';
 import useStore, { IStore } from '../hooks/useStore';
 
 const Navbar = () => {
-  const [dataType, setDataType] = useStore(
-    (state: IStore) => [state.dataType, state.setDataType],
+  const [term, setTerm] = useStore(
+    (state: IStore) => [state.term, state.setTerm],
     shallow
   );
 
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-
   const handleClick = (
     e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>,
-    NewDataType: string
+    newTerm: 'short' | 'long'
   ) => {
     e.preventDefault();
-    setDataType(NewDataType);
+    setTerm(newTerm);
   };
 
   return (
@@ -40,87 +36,31 @@ const Navbar = () => {
             aria-label="menu"
             sx={{ mr: 2 }}
           >
-            <RemoveRedEyeIcon />
+            <SportsBasketballIcon />
           </IconButton>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            MarketEye
+            Stock-Bounce
           </Typography>
           <Button
             // eslint-disable-next-line @typescript-eslint/ban-ts-comment
             // @ts-ignore
-            variant={dataType === 'by_one_day_avg_mf' ? 'outlined' : 'inherit'}
-            color="inherit"
+            variant={term === 'short' ? 'contained' : 'outlined'}
+            color="secondary"
             sx={{ mr: 2 }}
-            onClick={(e) => handleClick(e, 'by_one_day_avg_mf')}
+            onClick={(e) => handleClick(e, 'short')}
           >
-            1-day Money Flow
+            Short Term
           </Button>
           <Button
             // eslint-disable-next-line @typescript-eslint/ban-ts-comment
             // @ts-ignore
-            variant={
-              dataType === 'by_three_day_avg_mf' ? 'outlined' : 'inherit'
-            }
-            color="inherit"
+            variant={term === 'long' ? 'contained' : 'outlined'}
+            color="secondary"
             sx={{ mr: 2 }}
-            onClick={(e) => handleClick(e, 'by_three_day_avg_mf')}
+            onClick={(e) => handleClick(e, 'long')}
           >
-            3-day Money Flow
+            Long Term
           </Button>
-          <Button
-            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-            // @ts-ignore
-            variant={dataType === 'by_macd' ? 'outlined' : 'inherit'}
-            color="inherit"
-            sx={{ mr: 2 }}
-            onClick={(e) => handleClick(e, 'by_macd')}
-          >
-            MACD
-          </Button>
-          {/* <Button
-            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-            // @ts-ignore
-            variant={
-              dataType === 'by_five_prec_open_close_change'
-                ? 'outlined'
-                : 'inherit'
-            }
-            color="inherit"
-            sx={{ mr: 2 }}
-            onClick={(e) => handleClick(e, 'by_five_prec_open_close_change')}
-          >
-            5% change
-          </Button> */}
-          <Button
-            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-            // @ts-ignore
-            variant={dataType === 'by_volume' ? 'outlined' : 'inherit'}
-            color="inherit"
-            sx={{ mr: 2 }}
-            onClick={(e) => handleClick(e, 'by_volume')}
-          >
-            1-day Volume
-          </Button>
-          <Button
-            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-            // @ts-ignore
-            variant={
-              dataType === 'by_three_day_avg_volume' ? 'outlined' : 'inherit'
-            }
-            color="inherit"
-            sx={{ mr: 2 }}
-            onClick={(e) => handleClick(e, 'by_three_day_avg_volume')}
-          >
-            3-day Volume
-          </Button>
-          <Button
-            style={{ backgroundColor: 'white' }}
-            sx={{ mr: 2 }}
-            onClick={handleOpen}
-          >
-            Report a Problem
-          </Button>
-          <ModalForm open={open} setOpen={setOpen} />
         </Toolbar>
       </AppBar>
     </Box>

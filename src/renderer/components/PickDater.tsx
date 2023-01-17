@@ -4,34 +4,30 @@ import DesktopDatePicker from '@mui/lab/DesktopDatePicker';
 import TextField from '@mui/material/TextField';
 import shallow from 'zustand/shallow';
 import useStore, { IStore } from '../hooks/useStore';
+import useDates from '../hooks/useDates';
 
 const PickDater = () => {
-  const [selectedDate, setSelectedDate, availableDates] = useStore(
-    (state: IStore) => [
-      state.selectedDate,
-      state.setSelectedDate,
-      state.availableDates,
-    ],
-    shallow
-  );
+  const { data, isLoading } = useDates();
 
   const handleChange = (newValue: Date | null) => {
     if (newValue !== null) {
-      setSelectedDate(newValue.toISOString().split('T')[0]);
+      console.log(newValue.toISOString().split('T')[0]);
     }
   };
 
+  if (!data) return null;
+
   const disableDates = (d: Date) => {
-    return !availableDates.includes(d.toISOString().split('T')[0]);
+    return !data.availableDates.includes(d.toISOString().split('T')[0]);
   };
 
   return (
     <LocalizationProvider dateAdapter={AdapterDateFns}>
       <DesktopDatePicker
-        label="Select Date"
+        label="Select T + 2 period"
         value={
-          new Date(selectedDate).getTime() +
-          new Date(selectedDate).getTimezoneOffset() * 60000
+          new Date(data.selectedDate).getTime() +
+          new Date(data.selectedDate).getTimezoneOffset() * 60000
         }
         onChange={handleChange}
         renderInput={(params) => (
@@ -39,6 +35,7 @@ const PickDater = () => {
           <TextField {...params} style={{ width: 200 }} />
         )}
         shouldDisableDate={disableDates}
+        loading={isLoading}
       />
     </LocalizationProvider>
   );
