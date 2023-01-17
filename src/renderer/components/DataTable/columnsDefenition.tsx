@@ -39,7 +39,7 @@ const columnsDefinition: GridColDef[] = [
     headerAlign: 'center',
     valueFormatter: (params: GridValueFormatterParams) => {
       const valueFormatted = Number(
-        (params.value as number).toPrecision(5)
+        (params.value as number).toPrecision(6)
       ).toLocaleString();
       return valueFormatted;
     },
@@ -56,7 +56,7 @@ const columnsDefinition: GridColDef[] = [
     headerAlign: 'center',
     valueFormatter: (params: GridValueFormatterParams) => {
       const valueFormatted = Number(
-        (params.value as number).toPrecision(4)
+        (params.value as number).toPrecision(6)
       ).toLocaleString();
       return valueFormatted;
     },

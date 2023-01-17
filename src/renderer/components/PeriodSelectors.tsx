@@ -21,6 +21,7 @@ const PeriodSelectors = ({ selectors, offset }: Props) => {
           // @ts-ignore
           color="inherit"
           onClick={() => useStore.setState({ period: (idx + offset) as any })}
+          style={{ fontWeight: 400 }}
         >
           {periodStr}
         </Button>

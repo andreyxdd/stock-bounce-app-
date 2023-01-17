@@ -6,33 +6,15 @@ import PickDater from './PickDater';
 import Footer from './Footer';
 import useStore, { IStore } from '../hooks/useStore';
 import PeriodSelectors from './PeriodSelectors';
+import { periodArrays, termDescription } from './utils';
 
 interface ILayoutProps {
   children: React.ReactNode;
 }
 
-const shortTermPeriods = ['T + 1', 'T', 'T - 1', 'T - 2', 'T - 3', 'T - 4'];
-
-const longTermPeriods = [
-  'T - 5',
-  'T - 6',
-  'T - 7',
-  'T - 8',
-  'T - 9',
-  'T - 10',
-  'T - 11',
-  'T - 12',
-  'T - 13',
-  'T - 14',
-  'T - 15',
-  'T - 16',
-];
-
 const Layout = ({ children }: ILayoutProps) => {
-  const [period, term] = useStore(
-    (state: IStore) => [state.period, state.term],
-    shallow
-  );
+  const { term } = useStore.getState();
+  const { title, desc } = termDescription[term];
 
   return (
     <div>
@@ -52,11 +34,11 @@ const Layout = ({ children }: ILayoutProps) => {
         >
           <PickDater />
           <div>
-            <Typography style={{ textAlign: 'right' }}>
+            <Typography style={{ textAlign: 'right', fontWeight: 500 }}>
               Select past period
             </Typography>
             <PeriodSelectors
-              selectors={term === 'short' ? shortTermPeriods : longTermPeriods}
+              selectors={periodArrays[term]}
               offset={term === 'short' ? 0 : 6}
             />
           </div>
@@ -64,9 +46,12 @@ const Layout = ({ children }: ILayoutProps) => {
       </Grid>
       <Divider />
       <Container maxWidth="xl" style={{ minHeight: 630 }}>
-        <Typography variant="h6" sx={{ mb: 1, mt: 2, fontSize: 16 }}>
-          {period + 1}
-        </Typography>
+        <div style={{ marginLeft: '10%', marginRight: '10%' }}>
+          <Typography variant="h6" sx={{ mb: 1, mt: 2, fontSize: 16 }}>
+            {title}
+          </Typography>
+          <Typography sx={{ mb: 1, mt: 2, fontSize: 14 }}>{desc}</Typography>
+        </div>
         <div style={{ width: '100%', minHeight: 630, marginBottom: 20 }}>
           {children}
         </div>

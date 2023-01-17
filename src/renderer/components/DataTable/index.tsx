@@ -69,9 +69,9 @@ const DataTable = () => {
         alignItems: 'center',
       }}
     >
-      <div style={{ width: '80%', minHeight: 630, position: 'relative' }}>
+      <div style={{ width: '80%', minHeight: 645, position: 'relative' }}>
         <SkeletonLoader
-          style={{ width: '100%', minHeight: 630, position: 'absolute' }}
+          style={{ width: '100%', minHeight: 645, position: 'absolute' }}
         />
       </div>
     </div>

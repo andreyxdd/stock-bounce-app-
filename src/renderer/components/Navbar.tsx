@@ -7,7 +7,7 @@ import {
   Button,
   IconButton,
 } from '@mui/material';
-import SportsBasketballIcon from '@mui/icons-material/SportsBasketball';
+import SportsBasketballTwoToneIcon from '@mui/icons-material/SportsBasketballTwoTone';
 import useStore from '../hooks/useStore';
 
 const Navbar = () => {
@@ -30,7 +30,7 @@ const Navbar = () => {
             aria-label="menu"
             sx={{ mr: 2 }}
           >
-            <SportsBasketballIcon />
+            <SportsBasketballTwoToneIcon color="secondary" />
           </IconButton>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Stock-Bounce
