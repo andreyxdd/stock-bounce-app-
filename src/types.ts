@@ -4,6 +4,7 @@ export interface IDataProps {
   open: number;
   close: number;
   volume: number;
+  cp_op_precentage_diff: number;
 }
 
 export interface IDateProps {

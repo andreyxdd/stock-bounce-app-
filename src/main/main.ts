@@ -51,13 +51,14 @@ ipcMain.handle('get-bounce-stocks', async (_event, arg) => {
       }
     );
 
-    console.log(response.data);
-    // const tickerData: IDataProps = response.data;
-    // return tickerData;
-    return [];
+    if (!response.data.length)
+      throw new Error('No data in the stock-bounce response');
+
+    const { data }: { data: Array<IDataProps> } = response;
+    return data.map((obj, id) => ({ ...obj, id: id + 1 }));
   } catch (e) {
     console.log(e);
-    return null;
+    return [];
   }
 });
 

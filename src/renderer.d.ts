@@ -1,14 +1,8 @@
-import {
-  IDataProps,
-  IDateProps,
-  IDataByTypesProps,
-  IMarketDataProps,
-} from 'types';
+import { IDataProps, IDateProps } from 'types';
 
 export interface IRequest {
   date: string;
-  ticker?: string;
-  criterion?: string;
+  period: number;
 }
 
 export interface IEmail {
@@ -28,17 +22,8 @@ export interface IElectronAPIConn {
 }
 
 export interface IElectronAPI {
-  getTickerAnalytics: (req: IRequest) => Promise<IDataProps | null>;
-  getAnalyticsListsByCriteria: (
-    req: IRequest
-  ) => Promise<IDataByTypesProps | null>;
-  getAnalyticsListsByCriterion: (
-    req: IRequest
-  ) => Promise<IDataByTypesProps | null>;
   getDates: () => Promise<Array<IDateProps>>;
-  getMarketAnalytics: (req: IRequest) => Promise<IMarketDataProps | null>;
-  notifyDeveloper: (req: IEmail) => Promise<INotificationStatus>;
-  conn: IElectronAPIConn;
+  getBounceStocks: (req: IRequest) => Promise<Array<IDataProps>>;
 }
 
 declare global {

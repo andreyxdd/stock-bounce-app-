@@ -1,7 +1,7 @@
 {
-  "name": "marketeye-desktop-app",
+  "name": "stock-bounce-app",
   "version": "1.0.0",
-  "description": "A private desktop app to analyze the stock market based on MarketEye API and electron-react-boilerplate",
+  "description": "Desktop client to showcase results of the stock markets analysis with bounce algorithm",
   "main": "./dist/main/main.js",
   "author": {
     "name": "Andrey Volkov",
@@ -14,5 +14,5 @@
     "postinstall": "npm run electron-rebuild && npm run link-modules"
   },
   "dependencies": {},
-  "license": "UNLICENSED"
+  "license": "MIT"
 }

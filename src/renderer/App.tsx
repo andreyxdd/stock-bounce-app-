@@ -15,7 +15,9 @@ const theme = createTheme({
 const MainComponent = () => {
   return (
     <ThemeProvider theme={theme}>
-      <Layout>{/* <DataTable /> */}</Layout>
+      <Layout>
+        <DataTable />
+      </Layout>
     </ThemeProvider>
   );
 };
