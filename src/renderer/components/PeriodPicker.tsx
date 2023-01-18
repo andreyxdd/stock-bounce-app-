@@ -7,6 +7,7 @@ type Props = {
 };
 
 const PeriodSelectors = ({ selectors, offset }: Props) => {
+  const currentPeriod = useStore((state) => state.period);
   return (
     <>
       {selectors.map((periodStr: string, idx: number) => (
@@ -14,9 +15,7 @@ const PeriodSelectors = ({ selectors, offset }: Props) => {
           key={periodStr}
           // eslint-disable-next-line @typescript-eslint/ban-ts-comment
           // @ts-ignore
-          variant={
-            idx + offset === useStore.getState().period ? 'outlined' : 'inherit'
-          }
+          variant={idx + offset === currentPeriod ? 'outlined' : 'inherit'}
           // eslint-disable-next-line @typescript-eslint/ban-ts-comment
           // @ts-ignore
           color="inherit"

@@ -11,6 +11,7 @@ import SportsBasketballTwoToneIcon from '@mui/icons-material/SportsBasketballTwo
 import useStore from '../hooks/useStore';
 
 const Navbar = () => {
+  const currentTerm = useStore((state) => state.term);
   const handleClick = (
     e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>,
     term: 'short' | 'long'
@@ -38,9 +39,7 @@ const Navbar = () => {
           <Button
             // eslint-disable-next-line @typescript-eslint/ban-ts-comment
             // @ts-ignore
-            variant={
-              useStore.getState().term === 'short' ? 'contained' : 'outlined'
-            }
+            variant={currentTerm === 'short' ? 'contained' : 'outlined'}
             color="secondary"
             sx={{ mr: 2 }}
             onClick={(e) => handleClick(e, 'short')}
@@ -50,9 +49,7 @@ const Navbar = () => {
           <Button
             // eslint-disable-next-line @typescript-eslint/ban-ts-comment
             // @ts-ignore
-            variant={
-              useStore.getState().term === 'long' ? 'contained' : 'outlined'
-            }
+            variant={currentTerm === 'long' ? 'contained' : 'outlined'}
             color="secondary"
             sx={{ mr: 2 }}
             onClick={(e) => handleClick(e, 'long')}

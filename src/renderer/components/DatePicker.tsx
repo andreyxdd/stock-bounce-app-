@@ -2,23 +2,23 @@ import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import DesktopDatePicker from '@mui/lab/DesktopDatePicker';
 import TextField from '@mui/material/TextField';
-import shallow from 'zustand/shallow';
-import useStore, { IStore } from '../hooks/useStore';
 import useDates from '../hooks/useDates';
+import useStore from '../hooks/useStore';
 
-const PickDater = () => {
-  const { data, isLoading } = useDates();
+const DatePicker = () => {
+  const selectedDate = useStore((state) => state.selectedDate);
+  const { data: availableDates, isLoading } = useDates();
 
   const handleChange = (newValue: Date | null) => {
     if (newValue !== null) {
-      console.log(newValue.toISOString().split('T')[0]);
+      useStore.setState({ selectedDate: newValue.toISOString().split('T')[0] });
     }
   };
 
-  if (!data) return null;
+  if (!availableDates || !selectedDate) return null;
 
   const disableDates = (d: Date) => {
-    return !data.availableDates.includes(d.toISOString().split('T')[0]);
+    return !availableDates.includes(d.toISOString().split('T')[0]);
   };
 
   return (
@@ -26,8 +26,8 @@ const PickDater = () => {
       <DesktopDatePicker
         label="Select T + 2 period"
         value={
-          new Date(data.selectedDate).getTime() +
-          new Date(data.selectedDate).getTimezoneOffset() * 60000
+          new Date(selectedDate).getTime() +
+          new Date(selectedDate).getTimezoneOffset() * 60000
         }
         onChange={handleChange}
         renderInput={(params) => (
@@ -41,4 +41,4 @@ const PickDater = () => {
   );
 };
 
-export default PickDater;
+export default DatePicker;

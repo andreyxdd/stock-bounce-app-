@@ -1,13 +1,9 @@
 import { useQuery } from 'react-query';
 import { IDateProps } from 'types';
-
-type DatesType = {
-  availableDates: Array<string>;
-  selectedDate: string;
-};
+import useStore from './useStore';
 
 const useDates = () => {
-  const query = useQuery<DatesType>('dates', async () => {
+  const query = useQuery<Array<string>>('dates', async () => {
     try {
       const responseAvailableDates: Array<IDateProps> =
         await window.electronAPI.getDates();
@@ -17,16 +13,15 @@ const useDates = () => {
 
       const nDates = availableDates.length;
       if (nDates > 0) {
-        const selectedDate = availableDates[nDates - 1];
-
-        return { availableDates, selectedDate };
+        useStore.setState({ selectedDate: availableDates[nDates - 1] });
+        return availableDates;
       }
       throw new Error('Array of dates is empty');
     } catch (e) {
       // eslint-disable-next-line no-console
       console.error(e);
     }
-    return { availableDates: [], selectedDate: '' };
+    return []; // no available dates
   });
 
   return query;

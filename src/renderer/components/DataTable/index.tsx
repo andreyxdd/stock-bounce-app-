@@ -1,5 +1,5 @@
 import { Typography } from '@mui/material';
-import { DataGrid, GridRowParams } from '@mui/x-data-grid';
+import { DataGrid } from '@mui/x-data-grid';
 import SkeletonLoader from 'tiny-skeleton-loader-react';
 import React from 'react';
 import useBounce from '../../hooks/useBounce';

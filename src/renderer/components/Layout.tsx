@@ -1,11 +1,9 @@
 import { Container, Grid, Divider, Typography } from '@mui/material';
-import shallow from 'zustand/shallow';
-import React from 'react';
 import Navbar from './Navbar';
-import PickDater from './PickDater';
+import DatePicker from './DatePicker';
 import Footer from './Footer';
-import useStore, { IStore } from '../hooks/useStore';
-import PeriodSelectors from './PeriodSelectors';
+import useStore from '../hooks/useStore';
+import PeriodPicker from './PeriodPicker';
 import { periodArrays, termDescription } from './utils';
 
 interface ILayoutProps {
@@ -13,8 +11,8 @@ interface ILayoutProps {
 }
 
 const Layout = ({ children }: ILayoutProps) => {
-  const { term } = useStore.getState();
-  const { title, desc } = termDescription[term];
+  const currentTerm = useStore((state) => state.term);
+  const { title, desc } = termDescription[currentTerm];
 
   return (
     <div>
@@ -32,14 +30,14 @@ const Layout = ({ children }: ILayoutProps) => {
           alignItems="center"
           justifyContent="space-between"
         >
-          <PickDater />
+          <DatePicker />
           <div>
             <Typography style={{ textAlign: 'right', fontWeight: 500 }}>
               Select past period
             </Typography>
-            <PeriodSelectors
-              selectors={periodArrays[term]}
-              offset={term === 'short' ? 0 : 6}
+            <PeriodPicker
+              selectors={periodArrays[currentTerm]}
+              offset={currentTerm === 'short' ? 0 : 6}
             />
           </div>
         </Grid>
