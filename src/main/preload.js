@@ -2,6 +2,7 @@ const { contextBridge, ipcRenderer } = require('electron');
 
 contextBridge.exposeInMainWorld('electronAPI', {
   getBounceStocks: (req) => ipcRenderer.invoke('get-bounce-stocks', req),
+  getTrackedStocks: (req) => ipcRenderer.invoke('get-tracked-stocks', req),
   getDates: () => ipcRenderer.invoke('get-dates'),
   conn: {
     myPing() {

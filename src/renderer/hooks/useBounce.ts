@@ -13,7 +13,7 @@ const useBounce = () => {
     ['bounce', selectedDate, period],
     async () => {
       try {
-        if (!selectedDate) throw new Error('No selected date');
+        if (!selectedDate) throw new Error('No date selected');
 
         const responseBounceData = await window.electronAPI.getBounceStocks({
           date: selectedDate,

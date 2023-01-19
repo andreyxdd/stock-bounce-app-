@@ -62,6 +62,30 @@ ipcMain.handle('get-bounce-stocks', async (_event, arg) => {
   }
 });
 
+ipcMain.handle('get-tracked-stocks', async (_event, arg) => {
+  try {
+    const response = await axios.get(
+      `${process.env.MARKETEYE_API_URL_BOUNCE}/get_tracked_stocks`,
+      {
+        params: {
+          date: arg.date,
+          tickers: arg.tickers.join(','),
+          api_key: process.env.MARKETEYE_API_KEY,
+        },
+      }
+    );
+
+    if (!response.data.length)
+      throw new Error('No data in the stock-tracked response');
+
+    const { data }: { data: Array<IDataProps> } = response;
+    return data.map((obj, id) => ({ ...obj, id: id + 1 }));
+  } catch (e) {
+    console.log(e);
+    return [];
+  }
+});
+
 ipcMain.handle('get-dates', async () => {
   try {
     const response = await axios.get(

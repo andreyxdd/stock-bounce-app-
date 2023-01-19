@@ -1,11 +1,17 @@
 import Table from './Table';
+import useTrack from '../../hooks/useTrack';
 import useBounce from '../../hooks/useBounce';
 import useStore from '../../hooks/useStore';
 
 function TrackingDataTable() {
-  const { data, isSuccess, isFetched } = useBounce();
+  const { data, isLoading, isSuccess, isFetched } = useTrack();
   return (
-    <Table data={data} isLoading isSuccess={isSuccess} isFetched={isFetched} />
+    <Table
+      data={data}
+      isLoading={isLoading}
+      isSuccess={isSuccess}
+      isFetched={isFetched}
+    />
   );
 }
 

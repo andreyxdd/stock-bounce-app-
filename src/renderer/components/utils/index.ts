@@ -39,7 +39,7 @@ export const getNextDates = (
   const nextDate: string | undefined = arrayOfDates[currIdx + 1];
   if (nextDate) result.push(nextDate);
   const nextNextDate: string | undefined = arrayOfDates[currIdx + 2];
-  if (nextNextDate) result.push(nextDate);
+  if (nextNextDate) result.push(nextNextDate);
   result.unshift(currentDate);
 
   return result;

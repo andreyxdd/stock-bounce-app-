@@ -3,6 +3,7 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import SkeletonLoader from 'tiny-skeleton-loader-react';
+import shallow from 'zustand/shallow';
 import useStore from '../hooks/useStore';
 
 type Props = {
@@ -25,9 +26,16 @@ const getLabel = (id: number) => {
 const label = 'Select tracking period';
 
 function TrackPicker({ availableTrackDates }: Props) {
-  const selectedTrackingDate = useStore((state) => state.selectedTrackingDate);
+  const [selectedDate, selectedTrackingDate] = useStore(
+    (state) => [state.selectedDate, state.selectedTrackingDate],
+    shallow
+  );
   const handleChange = (event: SelectChangeEvent) => {
-    useStore.setState({ selectedTrackingDate: event.target.value });
+    console.log(selectedDate !== event.target.value);
+    useStore.setState({
+      selectedTrackingDate: event.target.value,
+      isTracking: selectedDate !== event.target.value,
+    });
   };
 
   if (!selectedTrackingDate || !availableTrackDates.length)

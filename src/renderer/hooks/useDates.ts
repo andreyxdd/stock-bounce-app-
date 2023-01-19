@@ -3,7 +3,7 @@ import { IDateProps } from 'types';
 import useStore from './useStore';
 
 const useDates = () => {
-  const query = useQuery<Array<string>>('dates', async () => {
+  const query = useQuery<Array<string>>(['dates'], async () => {
     try {
       const responseAvailableDates: Array<IDateProps> =
         await window.electronAPI.getDates();

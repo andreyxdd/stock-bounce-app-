@@ -1,8 +1,13 @@
 import { IDataProps, IDateProps } from 'types';
 
-export interface IRequest {
+export interface IBounceRequest {
   date: string;
   period: number;
+}
+
+export interface ITrackRequest {
+  date: string;
+  tickers: Array<string>;
 }
 
 export interface IEmail {
@@ -23,7 +28,8 @@ export interface IElectronAPIConn {
 
 export interface IElectronAPI {
   getDates: () => Promise<Array<IDateProps>>;
-  getBounceStocks: (req: IRequest) => Promise<Array<IDataProps>>;
+  getBounceStocks: (req: IBounceRequest) => Promise<Array<IDataProps>>;
+  getTrackedStocks: (req: ITrackRequest) => Promise<Array<IDataProps>>;
 }
 
 declare global {
