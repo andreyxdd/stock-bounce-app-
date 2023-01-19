@@ -1,7 +1,7 @@
 # Stock-bounce: Electron App
 
 <p>
-Desktop client to showcase results of the stock markets analysis with bounce algorithm
+Desktop client to showcase the stock markets analysis with bounce algorithm
 </p>
 <p>The project is built with <a href="https://github.com/andreyxdd/marketeye-api">Market-Eye API</a>, <a href="https://github.com/electron-react-boilerplate/electron-react-boilerplate">Electron React Boilerplate</a>, and <a href="https://mui.com/">MUI</a>.
 </p>
