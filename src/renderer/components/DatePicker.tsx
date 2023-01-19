@@ -2,6 +2,7 @@ import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import DesktopDatePicker from '@mui/lab/DesktopDatePicker';
 import TextField from '@mui/material/TextField';
+import SkeletonLoader from 'tiny-skeleton-loader-react';
 import useDates from '../hooks/useDates';
 import useStore from '../hooks/useStore';
 
@@ -11,20 +12,25 @@ const DatePicker = () => {
 
   const handleChange = (newValue: Date | null) => {
     if (newValue !== null) {
-      useStore.setState({ selectedDate: newValue.toISOString().split('T')[0] });
+      const date = newValue.toISOString().split('T')[0];
+      useStore.setState({
+        selectedDate: date,
+        selectedTrackingDate: date,
+      });
     }
   };
 
-  if (!availableDates || !selectedDate) return null;
+  if (!availableDates || !selectedDate)
+    return <SkeletonLoader style={{ width: 200, height: 50 }} />;
 
   const disableDates = (d: Date) => {
     return !availableDates.includes(d.toISOString().split('T')[0]);
   };
 
   return (
-    <LocalizationProvider dateAdapter={AdapterDateFns}>
+    <LocalizationProvider dateAdapter={AdapterDateFns} fullWidth>
       <DesktopDatePicker
-        label="Select T + 2 period"
+        label="Select period T"
         value={
           new Date(selectedDate).getTime() +
           new Date(selectedDate).getTimezoneOffset() * 60000
@@ -32,7 +38,7 @@ const DatePicker = () => {
         onChange={handleChange}
         renderInput={(params) => (
           // eslint-disable-next-line react/jsx-props-no-spreading
-          <TextField {...params} style={{ width: 200 }} />
+          <TextField {...params} />
         )}
         shouldDisableDate={disableDates}
         loading={isLoading}

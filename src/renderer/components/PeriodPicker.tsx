@@ -1,4 +1,7 @@
-import Button from '@mui/material/Button';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
 import useStore from '../hooks/useStore';
 
 type Props = {
@@ -6,26 +9,30 @@ type Props = {
   offset: number;
 };
 
+const label = 'Select number of periods to compute cumulative OP/CP change';
+
 const PeriodSelectors = ({ selectors, offset }: Props) => {
   const currentPeriod = useStore((state) => state.period);
+  const handleChange = (event: SelectChangeEvent) => {
+    useStore.setState({ period: (event.target.value + offset) as any });
+  };
   return (
-    <>
-      {selectors.map((periodStr: string, idx: number) => (
-        <Button
-          key={periodStr}
-          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-          // @ts-ignore
-          variant={idx + offset === currentPeriod ? 'outlined' : 'inherit'}
-          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-          // @ts-ignore
-          color="inherit"
-          onClick={() => useStore.setState({ period: (idx + offset) as any })}
-          style={{ fontWeight: 400 }}
-        >
-          {periodStr}
-        </Button>
-      ))}
-    </>
+    <FormControl fullWidth>
+      <InputLabel id="demo-simple-select-label">{label}</InputLabel>
+      <Select
+        labelId="demo-simple-select-label"
+        id="demo-simple-select"
+        value={(currentPeriod - offset).toString()}
+        label={label}
+        onChange={handleChange}
+      >
+        {selectors.map((periodStr: string, idx: number) => (
+          <MenuItem key={periodStr} value={idx}>
+            {periodStr}
+          </MenuItem>
+        ))}
+      </Select>
+    </FormControl>
   );
 };
 

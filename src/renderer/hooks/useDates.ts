@@ -13,7 +13,8 @@ const useDates = () => {
 
       const nDates = availableDates.length;
       if (nDates > 0) {
-        useStore.setState({ selectedDate: availableDates[nDates - 1] });
+        const date = availableDates[nDates - 1];
+        useStore.setState({ selectedDate: date, selectedTrackingDate: date });
         return availableDates;
       }
       throw new Error('Array of dates is empty');
