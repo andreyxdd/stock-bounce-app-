@@ -2,6 +2,7 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
+import shallow from 'zustand/shallow';
 import useStore from '../hooks/useStore';
 
 type Props = {
@@ -12,9 +13,16 @@ type Props = {
 const label = 'Select number of periods to compute cumulative OP/CP change';
 
 const PeriodSelectors = ({ selectors, offset }: Props) => {
-  const currentPeriod = useStore((state) => state.period);
+  const [currentPeriod, selectedDate] = useStore(
+    (state) => [state.period, state.selectedDate],
+    shallow
+  );
   const handleChange = (event: SelectChangeEvent) => {
-    useStore.setState({ period: (event.target.value + offset) as any });
+    useStore.setState({
+      period: (event.target.value + offset) as any,
+      isTracking: false,
+      selectedTrackingDate: selectedDate,
+    });
   };
   return (
     <FormControl fullWidth>

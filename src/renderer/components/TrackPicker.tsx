@@ -31,7 +31,6 @@ function TrackPicker({ availableTrackDates }: Props) {
     shallow
   );
   const handleChange = (event: SelectChangeEvent) => {
-    console.log(selectedDate !== event.target.value);
     useStore.setState({
       selectedTrackingDate: event.target.value,
       isTracking: selectedDate !== event.target.value,

@@ -8,16 +8,25 @@ import {
   IconButton,
 } from '@mui/material';
 import SportsBasketballTwoToneIcon from '@mui/icons-material/SportsBasketballTwoTone';
+import shallow from 'zustand/shallow';
 import useStore from '../hooks/useStore';
 
 const Navbar = () => {
-  const currentTerm = useStore((state) => state.term);
+  const [currentTerm, selectedDate] = useStore(
+    (state) => [state.term, state.selectedDate],
+    shallow
+  );
   const handleClick = (
     e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>,
     term: 'short' | 'long'
   ) => {
     e.preventDefault();
-    useStore.setState({ term, period: term === 'short' ? 0 : 6 });
+    useStore.setState({
+      term,
+      period: term === 'short' ? 0 : 6,
+      isTracking: false,
+      selectedTrackingDate: selectedDate,
+    });
   };
 
   return (
