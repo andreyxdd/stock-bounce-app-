@@ -4,11 +4,11 @@ import useBounce from '../../hooks/useBounce';
 import useStore from '../../hooks/useStore';
 
 function TrackingDataTable() {
-  const { data, isLoading, isSuccess, isFetched } = useTrack();
+  const { data, isFetching, isSuccess, isFetched } = useTrack();
   return (
     <Table
       data={data}
-      isLoading={isLoading}
+      isFetching={isFetching}
       isSuccess={isSuccess}
       isFetched={isFetched}
     />
@@ -16,11 +16,11 @@ function TrackingDataTable() {
 }
 
 function CurrentDataTable() {
-  const { data, isLoading, isSuccess, isFetched } = useBounce();
+  const { data, isFetching, isSuccess, isFetched } = useBounce();
   return (
     <Table
       data={data}
-      isLoading={isLoading}
+      isFetching={isFetching}
       isSuccess={isSuccess}
       isFetched={isFetched}
     />

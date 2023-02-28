@@ -7,7 +7,7 @@ import columnsDefinition from './columnsDefenition';
 
 type Props = {
   data: IDataProps[] | undefined;
-  isLoading: boolean;
+  isFetching: boolean;
   isSuccess: boolean;
   isFetched: boolean;
 };
@@ -20,10 +20,10 @@ const WrapperStyle = {
   alignItems: 'center',
 };
 
-const Table = ({ data, isLoading, isSuccess, isFetched }: Props) => {
+const Table = ({ data, isFetching, isSuccess, isFetched }: Props) => {
   const [pageSize, setPageSize] = React.useState<number>(10);
 
-  if (!isLoading && isSuccess && data) {
+  if (!isFetching && isSuccess && data) {
     return (
       <div style={WrapperStyle}>
         <div style={{ width: '95%' }}>

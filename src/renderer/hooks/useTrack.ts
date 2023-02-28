@@ -34,7 +34,7 @@ const useTrack = () => {
       }
       return [];
     },
-    { enabled: isTracking && !!data && !!data?.length }
+    { enabled: isTracking && !!data && !!data?.length, staleTime: Infinity }
   );
 
   return query;

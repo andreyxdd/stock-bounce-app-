@@ -27,7 +27,7 @@ const useBounce = () => {
       }
       return [];
     },
-    { enabled: !!selectedDate }
+    { enabled: !!selectedDate, staleTime: Infinity }
   );
 
   return query;
