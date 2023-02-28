@@ -8,6 +8,7 @@ export interface IState {
   selectedDate: string | undefined;
   isTracking: boolean;
   selectedTrackingDate: string | undefined;
+  isFrequencies: boolean;
 }
 
 const initialState: IState = {
@@ -16,6 +17,7 @@ const initialState: IState = {
   selectedDate: undefined,
   isTracking: false,
   selectedTrackingDate: undefined,
+  isFrequencies: false,
 };
 
 const useStore = create<IState>(() => ({ ...initialState }));

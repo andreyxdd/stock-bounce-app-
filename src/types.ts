@@ -5,6 +5,7 @@ export interface IDataProps {
   close: number;
   volume: number;
   cp_op_precentage_diff: number;
+  frequencies: string;
 }
 
 export interface IDateProps {

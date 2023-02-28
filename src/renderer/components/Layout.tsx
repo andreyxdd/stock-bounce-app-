@@ -53,7 +53,7 @@ const Layout = ({ children }: ILayoutProps) => {
         maxWidth="xl"
         style={{ minHeight: 630, justifyContent: 'space-between' }}
       >
-        <div style={{ marginLeft: '10%', marginRight: '10%' }}>
+        <div style={{ marginLeft: '2.5%', marginRight: '2.5%' }}>
           <Typography variant="h6" sx={{ mb: 1, mt: 2, fontSize: 16 }}>
             {title}
           </Typography>

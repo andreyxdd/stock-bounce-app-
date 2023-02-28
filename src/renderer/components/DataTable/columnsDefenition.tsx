@@ -1,4 +1,9 @@
-import { GridColDef, GridValueFormatterParams } from '@mui/x-data-grid';
+import { Typography } from '@mui/material';
+import {
+  GridColDef,
+  GridRenderCellParams,
+  GridValueFormatterParams,
+} from '@mui/x-data-grid';
 
 const columnsDefinition: GridColDef[] = [
   {
@@ -46,7 +51,7 @@ const columnsDefinition: GridColDef[] = [
     description: 'Opening prices of the stock on a given trading day',
     disableColumnMenu: true,
     sortable: false,
-    flex: 1,
+    flex: 0.8,
   },
   {
     field: 'close',
@@ -63,7 +68,7 @@ const columnsDefinition: GridColDef[] = [
     description: 'CLosing prices of the stock on a given trading day',
     disableColumnMenu: true,
     sortable: false,
-    flex: 1,
+    flex: 0.8,
   },
   {
     field: 'cp_op_precentage_diff',
@@ -81,7 +86,7 @@ const columnsDefinition: GridColDef[] = [
       'Precentage change between close and open prices for the given trading day',
     disableColumnMenu: true,
     sortable: false,
-    flex: 1,
+    flex: 0.8,
   },
   {
     field: 'volume',
@@ -98,7 +103,25 @@ const columnsDefinition: GridColDef[] = [
     description: 'Stock volume',
     disableColumnMenu: true,
     sortable: false,
-    flex: 1,
+    flex: 0.5,
+  },
+  {
+    field: 'frequencies',
+    headerName: 'Frequencies',
+    type: 'string',
+    align: 'center',
+    headerAlign: 'center',
+    description:
+      'This column shows other bounce periods when the given stock was in top 20',
+    disableColumnMenu: true,
+    flex: 2,
+    renderCell: (params: GridRenderCellParams<string>) => {
+      return (
+        <Typography fontSize={12} noWrap>
+          {params.value}
+        </Typography>
+      );
+    },
   },
 ];
 

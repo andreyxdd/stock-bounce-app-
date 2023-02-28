@@ -26,7 +26,7 @@ const Table = ({ data, isLoading, isSuccess, isFetched }: Props) => {
   if (!isLoading && isSuccess && data) {
     return (
       <div style={WrapperStyle}>
-        <div style={{ width: '80%' }}>
+        <div style={{ width: '95%' }}>
           <DataGrid
             rows={data}
             columns={columnsDefinition}
@@ -63,7 +63,7 @@ const Table = ({ data, isLoading, isSuccess, isFetched }: Props) => {
 
   return (
     <div style={WrapperStyle}>
-      <div style={{ width: '80%', minHeight: 645, position: 'relative' }}>
+      <div style={{ width: '95%', minHeight: 645, position: 'relative' }}>
         <SkeletonLoader
           style={{ width: '100%', minHeight: 645, position: 'absolute' }}
         />

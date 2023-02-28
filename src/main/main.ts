@@ -35,6 +35,42 @@ ipcMain.on('ipc-example', async (event, arg) => {
   event.reply('ipc-example', msgTemplate('pong'));
 });
 
+// --- UTILITIES
+const MAX_PERIOD = 19;
+
+async function prepareData(
+  initData: Array<Omit<IDataProps, 'frequencies'>>,
+  date: string,
+  period: number
+) {
+  try {
+    const response = await axios.get(
+      `${process.env.MARKETEYE_API_URL_BOUNCE}/get_frequencies`,
+      {
+        params: {
+          date,
+          tickers: initData.map((row) => row.ticker).join(','),
+          period,
+          api_key: process.env.MARKETEYE_API_KEY,
+        },
+      }
+    );
+
+    if (!response.data.length)
+      throw new Error('No data in the frequencies response');
+
+    const { data }: { data: Array<string> } = response;
+    return initData.map((obj, id) => ({
+      ...obj,
+      id: id + 1,
+      frequencies: data[id],
+    }));
+  } catch (e) {
+    console.log(e);
+    return [];
+  }
+}
+
 // ---
 // Communication routes
 
@@ -54,8 +90,8 @@ ipcMain.handle('get-bounce-stocks', async (_event, arg) => {
     if (!response.data.length)
       throw new Error('No data in the stock-bounce response');
 
-    const { data }: { data: Array<IDataProps> } = response;
-    return data.map((obj, id) => ({ ...obj, id: id + 1 }));
+    const { data }: { data: Array<Omit<IDataProps, 'frequencies'>> } = response;
+    return await prepareData(data, arg.date, arg.period + 1);
   } catch (e) {
     console.log(e);
     return [];
@@ -78,8 +114,8 @@ ipcMain.handle('get-tracked-stocks', async (_event, arg) => {
     if (!response.data.length)
       throw new Error('No data in the stock-tracked response');
 
-    const { data }: { data: Array<IDataProps> } = response;
-    return data.map((obj, id) => ({ ...obj, id: id + 1 }));
+    const { data }: { data: Array<Omit<IDataProps, 'frequencies'>> } = response;
+    return await prepareData(data, arg.date, MAX_PERIOD);
   } catch (e) {
     console.log(e);
     return [];

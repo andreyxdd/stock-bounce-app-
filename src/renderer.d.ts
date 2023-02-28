@@ -10,6 +10,12 @@ export interface ITrackRequest {
   tickers: Array<string>;
 }
 
+export interface IFrequenciesRequest {
+  date: string;
+  tickers: Array<string>;
+  period: number;
+}
+
 export interface IEmail {
   body: string;
   subject: string;
@@ -30,6 +36,7 @@ export interface IElectronAPI {
   getDates: () => Promise<Array<IDateProps>>;
   getBounceStocks: (req: IBounceRequest) => Promise<Array<IDataProps>>;
   getTrackedStocks: (req: ITrackRequest) => Promise<Array<IDataProps>>;
+  getFrequencies: (req: IFrequenciesRequest) => Promise<any>;
 }
 
 declare global {
