@@ -3,7 +3,7 @@
 <p>
 Desktop client to showcase the stock markets analysis with bounce algorithm
 </p>
-<p>The project is built with <a href="https://github.com/andreyxdd/marketeye-api">Market-Eye API</a>, <a href="https://github.com/electron-react-boilerplate/electron-react-boilerplate">Electron React Boilerplate</a>, and <a href="https://mui.com/">MUI</a>.
+<p>The project is built with <a href="https://github.com/andreyxdd/marketeye-api">Market-Eye API</a>, <a href="https://github.com/electron-react-boilerplate/electron-react-boilerplate">Electron React Boilerplate</a>, <a href="https://mui.com/">MUI</a>, <a href="https://react-query-v3.tanstack.com/">React-Query</a>, and <a href="https://github.com/pmndrs/zustand">Zustand</a>.
 </p>
 
 ## Market-Eye API
