@@ -80,7 +80,7 @@ ipcMain.handle('get-bounce-stocks', async (_event, arg) => {
       {
         params: {
           date: arg.date,
-          period: arg.period + 1,
+          period: MAX_PERIOD,
           api_key: process.env.MARKETEYE_API_KEY,
         },
       }
@@ -90,7 +90,7 @@ ipcMain.handle('get-bounce-stocks', async (_event, arg) => {
       throw new Error('No data in the stock-bounce response');
 
     const { data }: { data: Array<Omit<IDataProps, 'frequencies'>> } = response;
-    return await prepareData(data, arg.date, arg.period + 1);
+    return await prepareData(data, arg.date, MAX_PERIOD);
   } catch (e) {
     console.log(e);
     return [];
