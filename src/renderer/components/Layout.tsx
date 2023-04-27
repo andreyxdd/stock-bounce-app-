@@ -44,7 +44,7 @@ const Layout = ({ children }: ILayoutProps) => {
         <Grid item xs>
           <PeriodPicker
             selectors={periodArrays[currentTerm]}
-            offset={currentTerm === 'short' ? 0 : 6}
+            offset={currentTerm === 'short' ? 0 : 5}
           />
         </Grid>
       </Grid>

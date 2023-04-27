@@ -23,7 +23,7 @@ const Navbar = () => {
     e.preventDefault();
     useStore.setState({
       term,
-      period: term === 'short' ? 0 : 6,
+      period: term === 'short' ? 0 : 5,
       isTracking: false,
       selectedTrackingDate: selectedDate,
     });

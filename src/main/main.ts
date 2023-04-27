@@ -36,7 +36,7 @@ ipcMain.on('ipc-example', async (event, arg) => {
 });
 
 // --- UTILITIES
-const MAX_PERIOD = 19;
+const MAX_PERIOD = 18;
 
 async function prepareData(
   initData: Array<Omit<IDataProps, 'frequencies'>>,
@@ -73,7 +73,6 @@ async function prepareData(
 
 // ---
 // Communication routes
-
 ipcMain.handle('get-bounce-stocks', async (_event, arg) => {
   try {
     const response = await axios.get(

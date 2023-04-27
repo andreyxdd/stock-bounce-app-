@@ -14,7 +14,7 @@ const columnsDefinition: GridColDef[] = [
     description:
       'Ranking by the accumulative differences between close-open prices',
     hideable: false,
-    flex: 0.05,
+    flex: 0.3,
   },
   {
     field: 'ticker',
@@ -34,7 +34,7 @@ const columnsDefinition: GridColDef[] = [
     disableColumnMenu: true,
     sortable: false,
     hideable: false,
-    flex: 0.4,
+    flex: 0.25,
   },
   {
     field: 'open',
@@ -86,7 +86,7 @@ const columnsDefinition: GridColDef[] = [
       'Precentage change between close and open prices for the given trading day',
     disableColumnMenu: true,
     sortable: false,
-    flex: 0.8,
+    flex: 0.5,
   },
   {
     field: 'volume',
@@ -103,7 +103,7 @@ const columnsDefinition: GridColDef[] = [
     description: 'Stock volume',
     disableColumnMenu: true,
     sortable: false,
-    flex: 0.5,
+    flex: 0.4,
   },
   {
     field: 'frequencies',
@@ -114,6 +114,7 @@ const columnsDefinition: GridColDef[] = [
     description:
       'This column shows other bounce periods when the given stock was in top 20',
     disableColumnMenu: true,
+    sortable: false,
     flex: 2,
     renderCell: (params: GridRenderCellParams<string>) => {
       return (
