@@ -1,6 +1,6 @@
 {
   "name": "stock-bounce-app",
-  "version": "1.1.2",
+  "version": "1.1.3",
   "description": "Desktop client to showcase results of the stock markets analysis with bounce algorithm",
   "main": "./dist/main/main.js",
   "author": {

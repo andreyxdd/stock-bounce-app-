@@ -8,6 +8,7 @@ import useStore from '../hooks/useStore';
 import PeriodPicker from './PeriodPicker';
 import { getNextDates, periodArrays, termDescription } from './utils';
 import TrackPicker from './TrackPicker';
+import RangePicker from './RangePicker';
 
 interface ILayoutProps {
   children: React.ReactNode;
@@ -35,6 +36,9 @@ const Layout = ({ children }: ILayoutProps) => {
       >
         <Grid item>
           <DatePicker />
+        </Grid>
+        <Grid item xs>
+          <RangePicker />
         </Grid>
         <Grid item xs>
           {availableTrackDates ? (
