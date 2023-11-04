@@ -89,9 +89,12 @@ export default class MenuBuilder {
             label: 'Learn More',
             click() {
               shell.openExternal(
-                'https://github.com/andreyxdd/stock-bounce-app#readme'
+                'https://github.com/andreyxdd/stock-bounce-client#readme'
               );
             },
+          },
+          {
+            label: 'v1.1.4',
           },
         ],
       },

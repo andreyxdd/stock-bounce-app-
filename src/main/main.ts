@@ -19,6 +19,9 @@ import MenuBuilder from './menu';
 import { resolveHtmlPath } from './util';
 import { IDataProps, IDateProps } from '../types';
 
+const MARKETEYE_API_KEY = 'UgpW5hp32J3KSyGbxnKRmppprQ2xR4qrMArDNwNq';
+const MARKETEYE_API_URL = 'https://marketeye-api.herokuapp.com/api';
+
 export default class AppUpdater {
   constructor() {
     log.transports.file.level = 'info';
@@ -45,13 +48,13 @@ async function prepareData(
 ) {
   try {
     const response = await axios.get(
-      `${process.env.MARKETEYE_API_URL}/bounce/get_frequencies`,
+      `${MARKETEYE_API_URL}/bounce/get_frequencies`,
       {
         params: {
           date,
           tickers: initData.map((row) => row.ticker).join(','),
           period,
-          api_key: process.env.MARKETEYE_API_KEY,
+          api_key: MARKETEYE_API_KEY,
         },
       }
     );
@@ -76,12 +79,12 @@ async function prepareData(
 ipcMain.handle('get-bounce-stocks', async (_event, arg) => {
   try {
     const response = await axios.get(
-      `${process.env.MARKETEYE_API_URL}/bounce/get_bounce_stocks`,
+      `${MARKETEYE_API_URL}/bounce/get_bounce_stocks`,
       {
         params: {
           date: arg.date,
           period: arg.period + 1,
-          api_key: process.env.MARKETEYE_API_KEY,
+          api_key: MARKETEYE_API_KEY,
         },
       }
     );
@@ -100,12 +103,12 @@ ipcMain.handle('get-bounce-stocks', async (_event, arg) => {
 ipcMain.handle('get-tracked-stocks', async (_event, arg) => {
   try {
     const response = await axios.get(
-      `${process.env.MARKETEYE_API_URL}/bounce/get_tracked_stocks`,
+      `${MARKETEYE_API_URL}/bounce/get_tracked_stocks`,
       {
         params: {
           date: arg.date,
           tickers: arg.tickers.join(','),
-          api_key: process.env.MARKETEYE_API_KEY,
+          api_key: MARKETEYE_API_KEY,
         },
       }
     );
@@ -123,14 +126,11 @@ ipcMain.handle('get-tracked-stocks', async (_event, arg) => {
 
 ipcMain.handle('get-dates', async () => {
   try {
-    const response = await axios.get(
-      `${process.env.MARKETEYE_API_URL}/bounce/get_dates`,
-      {
-        params: {
-          api_key: process.env.MARKETEYE_API_KEY,
-        },
-      }
-    );
+    const response = await axios.get(`${MARKETEYE_API_URL}/bounce/get_dates`, {
+      params: {
+        api_key: MARKETEYE_API_KEY,
+      },
+    });
 
     const dates: IDateProps = response.data;
     return dates;
