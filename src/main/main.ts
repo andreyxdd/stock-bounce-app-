@@ -45,7 +45,7 @@ async function prepareData(
 ) {
   try {
     const response = await axios.get(
-      `${process.env.MARKETEYE_API_URL_BOUNCE}/get_frequencies`,
+      `${process.env.MARKETEYE_API_URL}/bounce/get_frequencies`,
       {
         params: {
           date,
@@ -76,7 +76,7 @@ async function prepareData(
 ipcMain.handle('get-bounce-stocks', async (_event, arg) => {
   try {
     const response = await axios.get(
-      `${process.env.MARKETEYE_API_URL_BOUNCE}/get_bounce_stocks`,
+      `${process.env.MARKETEYE_API_URL}/bounce/get_bounce_stocks`,
       {
         params: {
           date: arg.date,
@@ -100,7 +100,7 @@ ipcMain.handle('get-bounce-stocks', async (_event, arg) => {
 ipcMain.handle('get-tracked-stocks', async (_event, arg) => {
   try {
     const response = await axios.get(
-      `${process.env.MARKETEYE_API_URL_BOUNCE}/get_tracked_stocks`,
+      `${process.env.MARKETEYE_API_URL}/bounce/get_tracked_stocks`,
       {
         params: {
           date: arg.date,
@@ -124,7 +124,7 @@ ipcMain.handle('get-tracked-stocks', async (_event, arg) => {
 ipcMain.handle('get-dates', async () => {
   try {
     const response = await axios.get(
-      `${process.env.MARKETEYE_API_URL_BOUNCE}/get_dates`,
+      `${process.env.MARKETEYE_API_URL}/bounce/get_dates`,
       {
         params: {
           api_key: process.env.MARKETEYE_API_KEY,

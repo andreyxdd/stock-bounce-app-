@@ -1,16 +1,14 @@
-name: Test
+name: Build and release
 
 on:
-  push:
-    branches:
-      - main
+  workflow_dispatch:
 
 concurrency:
-  group: test
+  group: build-and-release
   cancel-in-progress: true
 
 jobs:
-  test:
+  build-and-release:
     runs-on: windows-latest
     steps:
       - name: Check out the repo
@@ -22,9 +20,9 @@ jobs:
           cache: npm
       - name: Install dependencies
         run: npm install
-      - name: Run tests
-        run: |
-          npm run package
-          npm run lint
-          npm exec tsc
-          npm test
+      - name: Build and release the app
+        env:
+          GH_TOKEN: ${{ secrets.github_token }}
+          MARKETEYE_API_KEY: ${{ secrets.MARKETEYE_API_KEY }}
+          MARKETEYE_API_URL: ${{ secrets.MARKETEYE_API_URL }}
+        run: npm run package:publish
